@@ -24,21 +24,24 @@ class Stack:
 
 
 fst = Stack()
+ts = ['(((([{}]))))', '[([])((([[[]]])))]{()}', '{{[()]}}', '}{}', '{{[(])]}}', '[[{())}]']
 
-if __name__ == '__main__':
-    s = '(((([{}]))))'
 
-    for i in s:
+def check_balance(item):
+    for i in item:
         if i in ['[', '(', '{']:
             fst.push(i)
+        elif not fst.isEmpty() and fst.peek() + i in ['()', '{}', '[]']:
+            fst.pop()
         else:
-            if not fst.isEmpty() and fst.peek() + i in ['()', '{}', '[]']:
-                fst.pop()
-            else:
-                print('Не сбалансировано')
-                quit()
+            return print('Не сбалансировано')
 
     if fst.isEmpty():
-        print('Сбалансировано')
+        return print('Сбалансировано')
     else:
-        print('Не сбалансировано')
+        return print('Не сбалансировано')
+
+
+if __name__ == '__main__':
+    for it in ts:
+        check_balance(it)
